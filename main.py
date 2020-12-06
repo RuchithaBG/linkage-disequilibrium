@@ -1,13 +1,14 @@
 # LD
 
 import random as rn
+import matplotlib.pyplot as plt
 
 recom = 0.1
 n_mates = 1
 n_offsprings = 2 #  No. of offsprings per mating
-N = 4 #  Change population size later
-NoG = 2 # excluding parent generation
-NoR = 10
+N = 100 #  Population size before mixing
+NoG = 4 # excluding parent generation
+NoR = 3
 
 X = [['A','B'] for i in range(N)]
 Y = [['a','b'] for i in range(N)]
@@ -55,4 +56,32 @@ def replicates(NoR, NoG, Z, G, recom, n_mates, n_offsprings):
         reps += [timeseries(NoG, Z, G, recom, n_mates, n_offsprings)]
     return(reps)
 
-print(replicates(NoR, NoG, Z, G, recom, n_mates, n_offsprings))
+reps = replicates(NoR, NoG, Z, G, recom, n_mates, n_offsprings)
+
+# reps = [[[['A','B'],['A','B'],['a','b'],['a','b']],[['A','B'],['A','B'],['a','b'],['a','b']],[['A','B'],['A','B'],['a','b'],['a','b']]],
+#        [[['A','b'],['a','B'],['a','b'],['a','b']],[['A','B'],['A','B'],['a','b'],['a','b']],[['A','B'],['A','B'],['a','b'],['a','b']]],
+#        [[['A','B'],['A','B'],['a','b'],['a','b']],[['a','B'],['A','b'],['a','b'],['a','b']],[['A','B'],['A','B'],['a','b'],['a','b']]]]
+
+CR=[]
+CG=[]
+count_g = 0
+for i in range(NoR):
+    for j in range(NoG+1):
+        for k in range(2*N):
+            if reps[i][j][k][0] == 'A' and reps[i][j][k][1] == 'b':
+                count_g += 1
+            elif reps[i][j][k][0] == 'a' and reps[i][j][k][1] == 'B':
+                count_g += 1
+            else:
+                continue
+        CG.append(count_g/(2*N))
+        count_g = 0
+    CR.append(CG)
+    CG = []
+
+print(CR)
+
+for i in range(NoR):
+    plt.plot(CR[i])
+plt.show()
+plt.close()
