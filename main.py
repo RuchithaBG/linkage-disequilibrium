@@ -21,4 +21,4 @@ def mate(F, M_list, recom, n_mates, n_offsprings):
                     z.append(F)
                 else:
                     z.append(M)
-    return(z, M)
+    return(z)
