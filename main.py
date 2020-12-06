@@ -6,7 +6,8 @@ recom = 0.1
 n_mates = 1
 n_offsprings = 2 #  No. of offsprings per mating
 N = 4 #  Change population size later
-NoG = 2
+NoG = 2 # excluding parent generation
+NoR = 10
 
 X = [['A','B'] for i in range(N)]
 Y = [['a','b'] for i in range(N)]
@@ -48,4 +49,10 @@ def timeseries(NoG, Z, G, recom, n_mates, n_offsprings):
         pop += [nextgen(Z, G, recom, n_mates, n_offsprings)]
     return(pop)
 
-print(timeseries(NoG, Z, G, recom, n_mates, n_offsprings))
+def replicates(NoR, NoG, Z, G, recom, n_mates, n_offsprings):
+    reps = []
+    for i in range(NoR):
+        reps += [timeseries(NoG, Z, G, recom, n_mates, n_offsprings)]
+    return(reps)
+
+print(replicates(NoR, NoG, Z, G, recom, n_mates, n_offsprings))
