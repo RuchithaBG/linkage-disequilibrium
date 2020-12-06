@@ -6,10 +6,6 @@ recom = 0.1
 n_mates = 1
 n_offsprings = 2 #  no. of offsprings per mating
 
-# To be deleted later
-F = ['A','B']
-M_list = [['A','B'],['A','b'],['a','B'],['a','b']]
-
 def mate(F, M_list, recom, n_mates, n_offsprings):
     z = []
     for i in range(n_mates):
@@ -26,5 +22,3 @@ def mate(F, M_list, recom, n_mates, n_offsprings):
                 else:
                     z.append(M)
     return(z, M)
-
-print(mate(F, M_list, recom, n_mates, n_offsprings))
