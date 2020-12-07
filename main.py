@@ -52,7 +52,8 @@ def nextgen(Z, G, recom, n_mates, n_offsprings):
 def timeseries(NoG, Z, G, recom, n_mates, n_offsprings):
     pop = [Z]
     for i in range(NoG):
-        pop += [nextgen(Z, G, recom, n_mates, n_offsprings)]
+        Z = nextgen(Z, G, recom, n_mates, n_offsprings)
+        pop += [Z]
     return(pop)
 
 def replicates(NoR, NoG, Z, G, recom, n_mates, n_offsprings):
